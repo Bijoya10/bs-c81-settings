@@ -9,7 +9,7 @@ export default class WelcomeScreen extends React.Component{
         this.state={
             emailId:"",
             password:"",
-            isModalVisible:"",
+            isModalVisible:false,
             firstName:"",
             lastName:"",
             contact:"",
@@ -20,7 +20,7 @@ export default class WelcomeScreen extends React.Component{
     userLogin=(email,password)=>{
         firebase.auth().signInWithEmailAndPassword(email,password)
         .then(()=>{
-            Alert.alert("logged in successfully");
+            this.props.navigation.navigate("Donate");
         })
         .catch((error)=>{
             var errMsg=error.message;
@@ -57,31 +57,35 @@ export default class WelcomeScreen extends React.Component{
             <Modal transparent={false}
                     visible={this.state.isModalVisible}
                     animationType="fade">
-                        <View>
+                        <View style={styles.modalStyle}>
                             <ScrollView style={{width:"100%"}}>
                                 <KeyboardAvoidingView>
-                                    <Text>Registration</Text>
+                                    <View style={{alignItems:"center"}}><Text style={styles.text}>Registration</Text></View>
                                     <TextInput 
                                         style={styles.inputBox}
                                         placeholder="first name"
+                                        value={this.state.firstName}
                                         onChangeText={(text)=>{
                                             this.setState({firstName:text})
                                         }}/>
                                     <TextInput
                                         style={styles.inputBox}
                                         placeholder="last name"
+                                        value={this.state.lastName}
                                         onChangeText={(text)=>{
                                             this.setState({lastName:text})
                                         }}
                                     />
                                     <TextInput 
                                         style={styles.inputBox}
+                                        value={this.state.address}
                                         placeholder="address"
                                         onChangeText={(text)=>{
                                             this.setState({address:text})
                                         }}/>
                                     <TextInput
                                         style={styles.inputBox}
+                                        value={this.state.contact}
                                         placeholder="contact"
                                         keyboardType={"numeric"}
                                         onChangeText={(text)=>{
@@ -90,6 +94,7 @@ export default class WelcomeScreen extends React.Component{
                                     />
                                     <TextInput
                                         style={styles.inputBox}
+                                        value={this.state.emailId}
                                         placeholder="abc@email.com"
                                         keyboardType={'email-address'}
                                         onChangeText={(text)=>{
@@ -98,6 +103,7 @@ export default class WelcomeScreen extends React.Component{
                                         />
                                     <TextInput 
                                         style={styles.inputBox}
+                                        value={this.state.password}
                                         placeholder="password"
                                         secureTextEntry={true}
                                         onChangeText={(text)=>{
@@ -106,6 +112,7 @@ export default class WelcomeScreen extends React.Component{
                                         />
                                     <TextInput 
                                         style={styles.inputBox}
+                                        value={this.state.confirmPassword}
                                         placeholder="confirm password"
                                         secureTextEntry={true}
                                         onChangeText={(text)=>{
@@ -118,11 +125,11 @@ export default class WelcomeScreen extends React.Component{
                                             onPress={()=>{
                                                 this.userSignUp(this.state.emailId,this.state.password,this.state.confirmPassword)
                                             }}
-                                        ><Text>Sign Up</Text></TouchableOpacity>
+                                        ><Text style={styles.text}>Sign Up</Text></TouchableOpacity>
                                         <TouchableOpacity 
                                             style={styles.button}
                                             onPress={()=>{this.setState({isModalVisible:false})}}>
-                                            <Text>Cancel</Text></TouchableOpacity>
+                                            <Text style={styles.text}>Cancel</Text></TouchableOpacity>
                                     </View>
                                 </KeyboardAvoidingView>
                             </ScrollView>
@@ -175,19 +182,26 @@ const styles=StyleSheet.create({
         justifyContent:"center",
         alignItems:"center"
     },
+    modalStyle:{
+        marginTop:20,
+        justifyContent:"center",
+        alignItems:"center"
+    },
 
     button:{
-        width:"70%",
-        height:80,
-        borderRadius:2,
+        width:"50%",
+        height:60,
+        borderRadius:10,
         borderWidth:2,
         padding:10,
         alignItems:"center",
         justifyContent:"center",
-        backgroundColor:"pink"
+        backgroundColor:"pink",
+        marginTop:10,
+        alignSelf:"center"
     },
     text:{
-        fontSize:30,
+        fontSize:20,
         fontWeight:"bold"
     },
     inputBox:{
@@ -197,6 +211,8 @@ const styles=StyleSheet.create({
         borderWidth:2,
         padding:10,
         alignItems:"center",
-        justifyContent:"center"
+        justifyContent:"center",
+        marginTop:5,
+        alignSelf:"center"
     }
 })
