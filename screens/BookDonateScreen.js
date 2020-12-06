@@ -46,13 +46,13 @@ export default class BookDonateScreen extends React.Component{
                     <TouchableOpacity style={{
                         width:50,
                         height:30,
-                        backgroundColor:"orange",
+                        backgroundColor:"#E10032",
                         borderRadius:5,
                         alignItems:"center",
                         justifyContent:"center",
                     
                     }}>
-                        <Text style={{color:'#ffff'}}>View</Text>
+                        <Text style={{color:'#DBE8E1'}}>View</Text>
 
                     </TouchableOpacity>
                 }

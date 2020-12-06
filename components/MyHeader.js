@@ -5,8 +5,8 @@ import {Header} from "react-native-elements";
     
         return(
             <Header
-                backgroundColor="blue"
-                centerComponent={{text:"Book Santa",style:{color:"white",fontSize:20,fontWeight:"bold"}}}
+                backgroundColor="#151B25"
+                centerComponent={{text:"Book Santa",style:{color:"#DBE8E1",fontSize:20,fontWeight:"bold"}}}
             />
         )
    

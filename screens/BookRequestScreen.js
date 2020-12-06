@@ -56,7 +56,7 @@ export default class BookRequestScreen extends React.Component{
                         })
                     }}
                     value={this.state.reasonToRequest}
-                    style={styles.inputBox}/>
+                    style={[styles.inputBox,{height:"50%"}]}/>
                 <TouchableOpacity 
                    onPress={()=>{this.addRequest(this.state.bookName,this.state.reasonToRequest)}}
                     style={styles.button} >
@@ -70,6 +70,7 @@ export default class BookRequestScreen extends React.Component{
 
 const styles=StyleSheet.create({
     container:{
+        marginTop:100,
         justifyContent:"center",
         alignItems:"center"
     },
@@ -82,11 +83,12 @@ const styles=StyleSheet.create({
         padding:10,
         alignItems:"center",
         justifyContent:"center",
-        backgroundColor:"pink"
+        backgroundColor:"#E10032"
     },
     text:{
         fontSize:30,
-        fontWeight:"bold"
+        fontWeight:"bold",
+        color:"#DBE8E1"
     },
     inputBox:{
         width:"70%",

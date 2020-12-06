@@ -3,6 +3,9 @@ import {View,Text,TextInput,StyleSheet,TouchableOpacity, Alert, ScrollView,Keybo
 import db from "../config";
 import firebase from "firebase";
 
+import MyHeader from "../components/MyHeader";
+import { Header } from "react-native/Libraries/NewAppScreen";
+
 export default class WelcomeScreen extends React.Component{
     constructor(){
         super();
@@ -59,8 +62,11 @@ export default class WelcomeScreen extends React.Component{
                     animationType="fade">
                         <View style={styles.modalStyle}>
                             <ScrollView style={{width:"100%"}}>
-                                <KeyboardAvoidingView>
+                                <KeyboardAvoidingView style={styles.container}>
+                                    <MyHeader/>
                                     <View style={{alignItems:"center"}}><Text style={styles.text}>Registration</Text></View>
+                                    
+                                
                                     <TextInput 
                                         style={styles.inputBox}
                                         placeholder="first name"
@@ -125,7 +131,7 @@ export default class WelcomeScreen extends React.Component{
                                             onPress={()=>{
                                                 this.userSignUp(this.state.emailId,this.state.password,this.state.confirmPassword)
                                             }}
-                                        ><Text style={styles.text}>Sign Up</Text></TouchableOpacity>
+                                        ><Text style={styles.text}>Register</Text></TouchableOpacity>
                                         <TouchableOpacity 
                                             style={styles.button}
                                             onPress={()=>{this.setState({isModalVisible:false})}}>
@@ -143,34 +149,31 @@ export default class WelcomeScreen extends React.Component{
         return(
             <View style={styles.container}>
                 {this.showModal()}
-                <Text style={styles.text}>
-                    Welcome
-                </Text>
+                <MyHeader/>
+                <View style={[styles.container,{marginTop:100}]}>
+                    <TextInput 
+                        style={styles.inputBox}
+                        placeholder="abc@email.com"
+                        keyboardType={"email-address"}
+                        onChangeText={(text)=>{this.setState({emailId:text})}}
+                        />
+                    <TextInput 
+                        style={styles.inputBox}
+                        placeholder="password"
+                        secureTextEntry={true}
+                        onChangeText={(text)=>{this.setState({password:text})}}
+                        />
+                    <TouchableOpacity  style={styles.button}
+                                        onPress={()=>this.userLogin(this.state.emailId,this.state.password)}>
+                        <Text style={styles.text}> Login </Text>
+                    </TouchableOpacity>
 
+                    <TouchableOpacity style={styles.button}
+                                        onPress={()=>this.setState({isModalVisible:true})}>
+                        <Text style={styles.text}> Sign Up </Text>
+                    </TouchableOpacity>
 
-                <TextInput 
-                    style={styles.inputBox}
-                    placeholder="abc@email.com"
-                    keyboardType={"email-address"}
-                    onChangeText={(text)=>{this.setState({emailId:text})}}
-                    />
-                <TextInput 
-                    style={styles.inputBox}
-                    placeholder="password"
-                    secureTextEntry={true}
-                    onChangeText={(text)=>{this.setState({password:text})}}
-                    />
-                <TouchableOpacity  style={styles.button}
-                                    onPress={()=>this.userLogin(this.state.emailId,this.state.password)}>
-                    <Text style={styles.text}> Login </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.button}
-                                    onPress={()=>this.setState({isModalVisible:true})}>
-                    <Text style={styles.text}> Sign Up </Text>
-                </TouchableOpacity>
-
-
+                </View>
 
             </View>
         )
@@ -178,12 +181,10 @@ export default class WelcomeScreen extends React.Component{
 }
 const styles=StyleSheet.create({
     container:{
-        marginTop:100,
         justifyContent:"center",
         alignItems:"center"
     },
     modalStyle:{
-        marginTop:20,
         justifyContent:"center",
         alignItems:"center"
     },
@@ -196,20 +197,21 @@ const styles=StyleSheet.create({
         padding:10,
         alignItems:"center",
         justifyContent:"center",
-        backgroundColor:"pink",
+        backgroundColor:"#E10032",
         marginTop:10,
         alignSelf:"center"
     },
     text:{
         fontSize:20,
-        fontWeight:"bold"
+        fontWeight:"bold",
+        color:"#DBE8E1"
     },
     inputBox:{
-        width:"70%",
+        width:200,
         height:80,
         borderRadius:2,
         borderWidth:2,
-        padding:10,
+        padding:5,
         alignItems:"center",
         justifyContent:"center",
         marginTop:5,
